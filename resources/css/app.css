@@ -1,0 +1,37 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+	--cms-primary: #0b5ed7;
+	--cms-accent: #198754;
+	--cms-bg-start: #f8fbff;
+	--cms-bg-end: #eef3f9;
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+	background: radial-gradient(circle at top right, var(--cms-bg-start), var(--cms-bg-end));
+	min-height: 100vh;
+}
+
+.brand-gradient {
+	background: linear-gradient(135deg, var(--cms-primary), var(--cms-accent));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.auth-shell {
+	min-height: 100vh;
+}
+
+.auth-card {
+	border: 0;
+	border-radius: 1rem;
+	box-shadow: 0 1rem 2.2rem rgba(16, 24, 40, 0.1);
+}
+
+.dashboard-card {
+	border: 0;
+	border-radius: 1rem;
+	box-shadow: 0 0.6rem 1.8rem rgba(16, 24, 40, 0.08);
+}
