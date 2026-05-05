@@ -28,15 +28,13 @@
 
             <div class="collapse navbar-collapse" id="cmsNavbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('dashboard') ? 'active fw-semibold' : '' }}" href="{{ route('dashboard') }}">
-                            <i class="fa-solid fa-gauge me-1"></i> Dashboard
-                        </a>
-                    </li>
                 </ul>
 
                 <div class="d-flex align-items-center gap-3">
                     <span class="text-muted small d-none d-md-inline">{{ auth()->user()->name }}</span>
+                    <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" title="Toggle dark mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="btn btn-outline-danger btn-sm">
@@ -71,7 +69,32 @@
             </div>
         @endisset
 
-        {{ $slot }}
+        @isset($slot)
+            {{ $slot }}
+        @else
+            @yield('content')
+        @endisset
     </div>
+    <script>
+        (function(){
+            const toggle = document.getElementById('darkModeToggle');
+
+            const apply = () => {
+                const darkEnabled = localStorage.getItem('cms-dark') === '1';
+
+                document.documentElement.classList.toggle('dark-mode', darkEnabled);
+                document.documentElement.setAttribute('data-bs-theme', darkEnabled ? 'dark' : 'light');
+                document.body.classList.toggle('dark-mode-body', darkEnabled);
+            };
+
+            apply();
+
+            toggle?.addEventListener('click', function(){
+                const cur = localStorage.getItem('cms-dark') === '1';
+                localStorage.setItem('cms-dark', cur ? '0' : '1');
+                apply();
+            });
+        })();
+    </script>
 </body>
 </html>

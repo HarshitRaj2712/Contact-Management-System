@@ -14,7 +14,11 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::withCount('contacts')->paginate(20);
+        $tags = Tag::withCount([
+            'contacts' => function ($query) {
+                $query->where('user_id', auth()->id());
+            },
+        ])->orderBy('tag_name')->paginate(20);
 
         return view('tags.index', compact('tags'));
     }

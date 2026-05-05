@@ -2,19 +2,31 @@
 
 @section('content')
 <div class="container-fluid py-4">
-    <div class="row mb-4">
-        <div class="col-md-8">
-            <h1 class="h2">
+    <div class="row mb-4 align-items-center">
+        <div class="col-lg-8">
+            <h1 class="h2 mb-1">
                 <i class="fas fa-address-book me-2"></i>My Contacts
             </h1>
+            <p class="text-muted mb-0">Search across names, phone numbers, emails, and company data.</p>
         </div>
-        <div class="col-md-4 text-end">
+        <div class="col-lg-4 text-lg-end">
             <a href="{{ route('contacts.create') }}" class="btn btn-primary">
                 <i class="fas fa-plus me-2"></i>Add New Contact
             </a>
-            <a href="{{ route('contacts.trash') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('contacts.trash') }}" class="btn btn-outline-secondary ms-2">
                 <i class="fas fa-trash me-2"></i>Trash
             </a>
+            <div class="mt-2">
+                <a href="{{ route('contacts.export') }}" class="btn btn-sm btn-outline-success mt-2">
+                    <i class="fas fa-file-csv me-1"></i>Export CSV
+                </a>
+                <a href="{{ route('contacts.exportPdf') }}" class="btn btn-sm btn-outline-secondary mt-2">
+                    <i class="fas fa-file-pdf me-1"></i>Export PDF
+                </a>
+                <a href="{{ route('contacts.duplicates') }}" class="btn btn-sm btn-outline-warning mt-2">
+                    <i class="fas fa-exclamation-triangle me-1"></i>Duplicates
+                </a>
+            </div>
         </div>
     </div>
 
@@ -25,143 +37,265 @@
         </div>
     @endif
 
-    @if ($contacts->count() > 0)
-        <div class="row g-4">
-            @foreach ($contacts as $contact)
-                <div class="col-lg-6">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <div class="d-flex align-items-center">
-                                    @if ($contact->profile_photo)
-                                        <img src="{{ Storage::url($contact->profile_photo) }}" 
-                                             alt="{{ $contact->full_name }}" 
-                                             class="rounded-circle me-3" 
-                                             style="width: 60px; height: 60px; object-fit: cover;">
-                                    @else
-                                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-3"
-                                             style="width: 60px; height: 60px;">
-                                            <i class="fas fa-user fs-5 text-muted"></i>
-                                        </div>
-                                    @endif
-                                    <div>
-                                        <h5 class="card-title mb-0">{{ $contact->full_name }}</h5>
-                                        @if ($contact->company)
-                                            <small class="text-muted">{{ $contact->company }}</small>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="favorite{{ $contact->id }}"
-                                           @checked($contact->favorite) 
-                                           onchange="toggleFavorite({{ $contact->id }})">
-                                    <label class="form-check-label" for="favorite{{ $contact->id }}">
-                                        <i class="fas fa-star text-warning"></i>
-                                    </label>
-                                </div>
-                            </div>
-
-                            @if ($contact->job_title)
-                                <p class="text-muted mb-2">
-                                    <i class="fas fa-briefcase me-2"></i>{{ $contact->job_title }}
-                                </p>
-                            @endif
-
-                            <div class="small mb-3">
-                                @if ($contact->phones->count() > 0)
-                                    <div class="mb-2">
-                                        <i class="fas fa-phone me-2 text-primary"></i>
-                                        @foreach ($contact->phones as $phone)
-                                            <span>{{ $phone->phone_number }}</span>
-                                            @if (!$loop->last)<br>@endif
-                                        @endforeach
-                                    </div>
-                                @endif
-
-                                @if ($contact->emails->count() > 0)
-                                    <div class="mb-2">
-                                        <i class="fas fa-envelope me-2 text-success"></i>
-                                        @foreach ($contact->emails as $email)
-                                            <span>{{ $email->email }}</span>
-                                            @if (!$loop->last)<br>@endif
-                                        @endforeach
-                                    </div>
-                                @endif
-                            </div>
-
-                            @if ($contact->tags->count() > 0)
-                                <div class="mb-3">
-                                    @foreach ($contact->tags as $tag)
-                                        <span class="badge bg-info">{{ $tag->tag_name }}</span>
-                                    @endforeach
-                                </div>
-                            @endif
-
-                            <div class="btn-group w-100" role="group">
-                                <a href="{{ route('contacts.show', $contact) }}" class="btn btn-sm btn-outline-primary">
-                                    <i class="fas fa-eye me-1"></i>View
-                                </a>
-                                <a href="{{ route('contacts.edit', $contact) }}" class="btn btn-sm btn-outline-warning">
-                                    <i class="fas fa-edit me-1"></i>Edit
-                                </a>
-                                <button type="button" class="btn btn-sm btn-outline-danger" 
-                                        data-bs-toggle="modal" data-bs-target="#deleteModal{{ $contact->id }}">
-                                    <i class="fas fa-trash me-1"></i>Delete
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Delete Confirmation Modal -->
-                    <div class="modal fade" id="deleteModal{{ $contact->id }}" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header bg-danger text-white">
-                                    <h5 class="modal-title">Delete Contact</h5>
-                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Are you sure you want to delete <strong>{{ $contact->full_name }}</strong>?</p>
-                                    <p class="text-muted small">This action moves the contact to trash and can be restored later.</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <form method="POST" action="{{ route('contacts.destroy', $contact) }}" style="display: inline;">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <!-- Pagination -->
-            <div class="row mt-4">
-                <div class="col-12">
-                    {{ $contacts->links() }}
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4">
+            <form id="contact-filter-form" action="{{ route('contacts.index') }}" method="GET" class="row g-3 align-items-end">
+                <div class="col-12 col-lg-5 position-relative">
+                    <label for="contact-search" class="form-label">Global Search</label>
+                    <input type="search"
+                           class="form-control form-control-lg"
+                           id="contact-search"
+                           name="search"
+                           placeholder="Search names, phones, emails, or company"
+                           value="{{ $filters['search'] ?? '' }}">
+                    <div id="contact-suggestions" class="list-group position-absolute w-100 shadow-sm d-none" style="z-index: 1050;"></div>
                 </div>
-            </div>
-    @else
-        <div class="alert alert-info text-center py-5" role="alert">
-            <i class="fas fa-inbox fs-1 mb-3 d-block"></i>
-            <h5>No contacts found</h5>
-            <p class="mb-0">Start by <a href="{{ route('contacts.create') }}" class="alert-link">creating your first contact</a></p>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <label for="category_id" class="form-label">Category</label>
+                    <select name="category_id" id="category_id" class="form-select">
+                        <option value="">All categories</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" @selected(($filters['category_id'] ?? '') == $category->id)>
+                                {{ $category->category_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-2">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" id="status" class="form-select">
+                        <option value="active" @selected(($filters['status'] ?? 'active') === 'active')>Active</option>
+                        <option value="trashed" @selected(($filters['status'] ?? '') === 'trashed')>Trashed</option>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-2">
+                    <label for="sort" class="form-label">Sort</label>
+                    <select name="sort" id="sort" class="form-select">
+                        <option value="az" @selected(($filters['sort'] ?? 'az') === 'az')>A-Z</option>
+                        <option value="za" @selected(($filters['sort'] ?? '') === 'za')>Z-A</option>
+                        <option value="newest" @selected(($filters['sort'] ?? '') === 'newest')>Recently Added</option>
+                        <option value="oldest" @selected(($filters['sort'] ?? '') === 'oldest')>Oldest First</option>
+                        <option value="favorites" @selected(($filters['sort'] ?? '') === 'favorites')>Favorites First</option>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <label for="tag_ids" class="form-label">Tags</label>
+                    <select name="tag_ids[]" id="tag_ids" class="form-select" multiple size="4">
+                        @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}" @selected(in_array($tag->id, $filters['tag_ids'] ?? [], false))>
+                                {{ $tag->tag_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="form-text">Hold Ctrl or Cmd to select multiple tags.</div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-2">
+                    <label for="birthday_month" class="form-label">Birthday Month</label>
+                    <select name="birthday_month" id="birthday_month" class="form-select">
+                        <option value="">Any month</option>
+                        @foreach (range(1, 12) as $month)
+                            <option value="{{ $month }}" @selected(($filters['birthday_month'] ?? '') == $month)>
+                                {{ \Carbon\Carbon::create()->month($month)->format('F') }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-2">
+                    <div class="form-check form-switch pt-4 mt-1">
+                        <input class="form-check-input" type="checkbox" id="recently_added" name="recently_added" value="1" @checked(!empty($filters['recently_added']))>
+                        <label class="form-check-label" for="recently_added">Added in last 30 days</label>
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex flex-wrap gap-2 pt-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter me-2"></i>Apply Filters
+                    </button>
+                    <a href="{{ route('contacts.index') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-rotate me-2"></i>Clear
+                    </a>
+                </div>
+            </form>
         </div>
-    @endif
+    </div>
+
+    <form id="bulk-action-form" method="POST" action="{{ route('contacts.bulkDelete') }}">
+        @csrf
+        <div class="d-flex justify-content-between mb-2">
+            <div>
+                <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Move selected contacts to trash?')">
+                    <i class="fas fa-trash me-1"></i>Bulk Delete
+                </button>
+            </div>
+            <div>
+                <a href="{{ route('contacts.import') }}" class="btn btn-outline-primary btn-sm ms-2" onclick="document.getElementById('import-file').click(); return false;">
+                    <i class="fas fa-file-import me-1"></i>Import CSV
+                </a>
+                <input type="file" id="import-file" name="csv_file" accept=".csv" form="import-form" class="d-none">
+            </div>
+        </div>
+
+        <div id="contact-results">
+            @include('contacts.partials.results', ['contacts' => $contacts, 'filters' => $filters])
+        </div>
+    </form>
+
+    <form id="import-form" method="POST" action="{{ route('contacts.import') }}" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="csv_file" id="import-file-hidden" class="d-none">
+    </form>
 </div>
 
 <script>
-    function toggleFavorite(contactId) {
-        // AJAX call to update favorite status
-        fetch(`/contacts/${contactId}/favorite`, {
-            method: 'POST',
+    const filterForm = document.getElementById('contact-filter-form');
+    const searchInput = document.getElementById('contact-search');
+    const suggestionsContainer = document.getElementById('contact-suggestions');
+    const resultsContainer = document.getElementById('contact-results');
+    let searchTimer = null;
+
+    async function loadContacts(url = null) {
+        const queryString = new URLSearchParams(new FormData(filterForm));
+        queryString.set('ajax', '1');
+
+        const requestUrl = url ? `${url}${url.includes('?') ? '&' : '?'}ajax=1` : `${filterForm.action}?${queryString.toString()}`;
+        const response = await fetch(requestUrl, {
             headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                'Content-Type': 'application/json'
-            }
-        }).catch(err => console.error(err));
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            return;
+        }
+
+        const data = await response.json();
+        resultsContainer.innerHTML = data.html;
+        renderSuggestions(data.suggestions || []);
+        bindPagination();
     }
+
+    function escapeHtml(value) {
+        return String(value)
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#39;');
+    }
+
+    function renderSuggestions(suggestions) {
+        const term = searchInput.value.trim();
+
+        if (!term || suggestions.length === 0) {
+            suggestionsContainer.innerHTML = '';
+            suggestionsContainer.classList.add('d-none');
+            return;
+        }
+
+        suggestionsContainer.innerHTML = suggestions.map((suggestion) => `
+            <button type="button" class="list-group-item list-group-item-action" data-suggestion-term="${escapeHtml(suggestion.name)}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>${escapeHtml(suggestion.name)}</span>
+                    ${suggestion.company ? `<small class="text-muted ms-3">${escapeHtml(suggestion.company)}</small>` : ''}
+                </div>
+            </button>
+        `).join('');
+        suggestionsContainer.classList.remove('d-none');
+    }
+
+    function bindPagination() {
+        resultsContainer.querySelectorAll('.pagination a').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                loadContacts(link.href);
+            });
+        });
+    }
+
+    filterForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        loadContacts();
+    });
+
+    filterForm.querySelectorAll('select, input[type="checkbox"]').forEach((element) => {
+        element.addEventListener('change', () => loadContacts());
+    });
+
+    searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => loadContacts(), 250);
+    });
+
+    suggestionsContainer.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-suggestion-term]');
+
+        if (!button) {
+            return;
+        }
+
+        searchInput.value = button.dataset.suggestionTerm;
+        suggestionsContainer.classList.add('d-none');
+        loadContacts();
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('#contact-suggestions') && event.target !== searchInput) {
+            suggestionsContainer.classList.add('d-none');
+        }
+    });
+
+    bindPagination();
+
+    async function toggleFavorite(id) {
+        try {
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const res = await fetch(`/contacts/${id}/favorite`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({}),
+            });
+
+            if (!res.ok) return;
+            const data = await res.json();
+            const btn = document.getElementById('favoriteBtn' + id);
+            const icon = document.getElementById('favoriteIcon' + id);
+
+            if (btn) {
+                btn.setAttribute('aria-pressed', data.favorite ? 'true' : 'false');
+            }
+
+            if (icon) {
+                icon.classList.toggle('fa-solid', !!data.favorite);
+                icon.classList.toggle('fa-regular', !data.favorite);
+                icon.classList.toggle('favorite-star-icon-favorite', !!data.favorite);
+                icon.classList.toggle('favorite-star-icon-normal', !data.favorite);
+            }
+        } catch (e) {
+            console.error('Favorite toggle failed', e);
+        }
+    }
+    // Import file handling
+    document.getElementById('import-file')?.addEventListener('change', function(){
+        const f = this.files[0];
+        if (!f) return;
+        const importForm = document.getElementById('import-form');
+        const hidden = document.getElementById('import-file-hidden');
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(f);
+        hidden.files = dataTransfer.files;
+        importForm.submit();
+    });
 </script>
 @endsection

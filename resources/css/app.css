@@ -35,3 +35,57 @@ body {
 	border-radius: 1rem;
 	box-shadow: 0 0.6rem 1.8rem rgba(16, 24, 40, 0.08);
 }
+
+/* Dark mode */
+html.dark-mode,
+html.dark-mode body,
+body.dark-mode-body {
+	--cms-bg-start: #0f1724;
+	--cms-bg-end: #0b1220;
+	--bs-body-color: #e6eef8;
+	background: radial-gradient(circle at top right, var(--cms-bg-start), var(--cms-bg-end));
+	color: var(--bs-body-color);
+}
+
+html.dark-mode .navbar,
+html.dark-mode .card,
+body.dark-mode-body .navbar,
+body.dark-mode-body .card {
+	background-color: #071029 !important;
+	color: var(--bs-body-color);
+}
+
+html.dark-mode .form-control,
+html.dark-mode .form-select,
+body.dark-mode-body .form-control,
+body.dark-mode-body .form-select {
+	background-color: #0f1724;
+	color: #e6eef8;
+	border-color: #334155;
+}
+
+html.dark-mode .text-muted,
+body.dark-mode-body .text-muted {
+	color: #9fb0c5 !important;
+}
+
+.favorite-star-btn {
+	background: transparent !important;
+	border: 0 !important;
+	padding: 0.15rem 0.25rem;
+	line-height: 1;
+	box-shadow: none !important;
+}
+
+.favorite-star-btn:focus {
+	box-shadow: none !important;
+}
+
+.favorite-star-icon-favorite {
+	color: #0d6efd;
+	filter: drop-shadow(0 0 2px rgba(13, 110, 253, 0.25));
+}
+
+.favorite-star-icon-normal {
+	color: #ffc107;
+}

@@ -42,9 +42,9 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     @if ($contact->profile_photo)
-                                        <img src="{{ Storage::url($contact->profile_photo) }}" 
-                                             alt="{{ $contact->full_name }}" 
-                                             class="rounded-circle me-2" 
+                                        <img src="{{ Storage::url($contact->profile_photo) }}"
+                                             alt="{{ $contact->full_name }}"
+                                             class="rounded-circle me-2"
                                              style="width: 40px; height: 40px; object-fit: cover;">
                                     @else
                                         <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2"
@@ -75,11 +75,11 @@
                             </td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <button type="button" class="btn btn-outline-success" 
+                                    <button type="button" class="btn btn-outline-success"
                                             onclick="restoreContact({{ $contact->id }})">
                                         <i class="fas fa-redo me-1"></i>Restore
                                     </button>
-                                    <button type="button" class="btn btn-outline-danger" 
+                                    <button type="button" class="btn btn-outline-danger"
                                             data-bs-toggle="modal" data-bs-target="#permanentDeleteModal{{ $contact->id }}">
                                         <i class="fas fa-times me-1"></i>Delete Permanently
                                     </button>
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <p class="mb-0">
-                                            <strong class="text-danger">⚠ Warning:</strong> This will permanently delete 
+                                            <strong class="text-danger">⚠ Warning:</strong> This will permanently delete
                                             <strong>{{ $contact->full_name }}</strong> and all associated data. This action cannot be undone.
                                         </p>
                                     </div>

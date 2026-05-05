@@ -31,7 +31,7 @@
         <div class="card-body p-4">
             <form action="{{ route('contacts.store') }}" method="POST" enctype="multipart/form-data" novalidate>
                 @csrf
-                
+
                 <!-- Basic Information Section -->
                 <h5 class="mb-3 border-bottom pb-2">
                     <i class="fas fa-user me-2"></i>Basic Information
@@ -40,7 +40,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="first_name" class="form-label">First Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('first_name') is-invalid @enderror" 
+                        <input type="text" class="form-control @error('first_name') is-invalid @enderror"
                                id="first_name" name="first_name" value="{{ old('first_name') }}" required>
                         @error('first_name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="last_name" class="form-label">Last Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('last_name') is-invalid @enderror" 
+                        <input type="text" class="form-control @error('last_name') is-invalid @enderror"
                                id="last_name" name="last_name" value="{{ old('last_name') }}" required>
                         @error('last_name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -59,7 +59,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="company" class="form-label">Company</label>
-                        <input type="text" class="form-control @error('company') is-invalid @enderror" 
+                        <input type="text" class="form-control @error('company') is-invalid @enderror"
                                id="company" name="company" value="{{ old('company') }}">
                         @error('company')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -67,9 +67,26 @@
                     </div>
                     <div class="col-md-6">
                         <label for="job_title" class="form-label">Job Title</label>
-                        <input type="text" class="form-control @error('job_title') is-invalid @enderror" 
+                        <input type="text" class="form-control @error('job_title') is-invalid @enderror"
                                id="job_title" name="job_title" value="{{ old('job_title') }}">
                         @error('job_title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="category_id" class="form-label">Category</label>
+                        <select class="form-select @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
+                            <option value="">No category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
+                                    {{ $category->category_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -79,7 +96,7 @@
                 <div class="mb-3">
                     <label for="profile_photo" class="form-label">Profile Photo</label>
                     <div class="input-group">
-                        <input type="file" class="form-control @error('profile_photo') is-invalid @enderror" 
+                        <input type="file" class="form-control @error('profile_photo') is-invalid @enderror"
                                id="profile_photo" name="profile_photo" accept="image/*" onchange="previewImage()">
                         <span class="input-group-text">
                             <i class="fas fa-image"></i>
@@ -94,7 +111,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="birthday" class="form-label">Birthday</label>
-                        <input type="date" class="form-control @error('birthday') is-invalid @enderror" 
+                        <input type="date" class="form-control @error('birthday') is-invalid @enderror"
                                id="birthday" name="birthday" value="{{ old('birthday') }}">
                         @error('birthday')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -109,7 +126,7 @@
 
                 <div class="mb-3">
                     <label for="notes" class="form-label">Notes</label>
-                    <textarea class="form-control @error('notes') is-invalid @enderror" 
+                    <textarea class="form-control @error('notes') is-invalid @enderror"
                               id="notes" name="notes" rows="4">{{ old('notes') }}</textarea>
                     @error('notes')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -128,7 +145,7 @@
                         @foreach ($tags as $tag)
                             <div class="col-auto">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="tags[]" 
+                                    <input class="form-check-input" type="checkbox" name="tags[]"
                                            value="{{ $tag->id }}" id="tag{{ $tag->id }}"
                                            @if(in_array($tag->id, old('tags', []))) checked @endif>
                                     <label class="form-check-label" for="tag{{ $tag->id }}">
@@ -158,7 +175,7 @@
     function previewImage() {
         const file = document.getElementById('profile_photo').files[0];
         const preview = document.getElementById('imagePreview');
-        
+
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {

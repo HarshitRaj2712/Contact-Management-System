@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="d-flex align-items-center gap-3">
                 @if ($contact->profile_photo)
-                    <img src="{{ Storage::url($contact->profile_photo) }}" alt="{{ $contact->full_name }}" 
+                    <img src="{{ Storage::url($contact->profile_photo) }}" alt="{{ $contact->full_name }}"
                          class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
                 @else
                     <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
@@ -20,6 +20,11 @@
                         <p class="text-muted mb-0">
                             <i class="fas fa-briefcase me-2"></i>{{ $contact->job_title ? $contact->job_title . ' at ' : '' }}{{ $contact->company }}
                         </p>
+                    @endif
+                    @if ($contact->category)
+                        <div class="mt-2">
+                            <span class="badge text-bg-light border">{{ $contact->category->category_name }}</span>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -102,11 +107,11 @@
                                         <p class="mb-0">{{ $phone->phone_number }}</p>
                                     </div>
                                     <div class="btn-group-sm" role="group">
-                                        <button type="button" class="btn btn-outline-warning btn-sm" 
+                                        <button type="button" class="btn btn-outline-warning btn-sm"
                                                 onclick="editPhone({{ $phone->id }})">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button type="button" class="btn btn-outline-danger btn-sm" 
+                                        <button type="button" class="btn btn-outline-danger btn-sm"
                                                 onclick="deletePhone({{ $phone->id }})">
                                             <i class="fas fa-trash"></i>
                                         </button>
@@ -143,7 +148,7 @@
                                         <button type="button" class="btn btn-outline-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button type="button" class="btn btn-outline-danger btn-sm" 
+                                        <button type="button" class="btn btn-outline-danger btn-sm"
                                                 onclick="deleteEmail({{ $email->id }})">
                                             <i class="fas fa-trash"></i>
                                         </button>
@@ -175,7 +180,7 @@
                                     <div>
                                         <p class="mb-1"><strong>{{ $address->address_line }}</strong></p>
                                         <p class="mb-0 text-muted small">
-                                            {{ $address->city }}{{ $address->state ? ', ' . $address->state : '' }} 
+                                            {{ $address->city }}{{ $address->state ? ', ' . $address->state : '' }}
                                             {{ $address->zip_code }}{{ $address->country ? ', ' . $address->country : '' }}
                                         </p>
                                     </div>
@@ -183,7 +188,7 @@
                                         <button type="button" class="btn btn-outline-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button type="button" class="btn btn-outline-danger btn-sm" 
+                                        <button type="button" class="btn btn-outline-danger btn-sm"
                                                 onclick="deleteAddress({{ $address->id }})">
                                             <i class="fas fa-trash"></i>
                                         </button>

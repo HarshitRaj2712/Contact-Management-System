@@ -23,6 +23,7 @@ class StorePhoneRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'contact_id' => 'required|integer|exists:contacts,id',
             'phone_number' => 'required|string|min:10|max:20',
             'type' => 'required|in:mobile,home,work',
         ];
