@@ -1,50 +1,34 @@
-<section class="py-5">
-    <div class="row g-4 align-items-stretch">
-        <div class="col-12">
-            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-4">
-                <div>
-                    <p class="text-uppercase text-primary fw-semibold mb-2">Features</p>
-                    <h3 class="fw-bold mb-2">Everything you need to manage contacts</h3>
-                    <p class="text-muted mb-0">A clean workflow for storing, organizing, and finding contacts without clutter.</p>
-                </div>
-                <a href="{{ route('register') }}" class="btn btn-outline-primary">Get Started</a>
-            </div>
+<section>
+    <div class="mb-6 flex items-end justify-between border-b border-slate-200 pb-4 dark:border-slate-800">
+        <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">Features</p>
+            <h3 class="mt-2 text-2xl font-semibold text-slate-950 dark:text-white">Everything you need to manage contacts</h3>
+            <p class="mt-2 text-slate-600 dark:text-slate-300">A clean workflow for storing, organizing, and finding contacts without clutter.</p>
         </div>
 
-        <div class="col-12 col-md-6 col-xl-4">
-            <div class="card feature-card h-100">
-                <div class="card-body p-4">
-                    <div class="d-inline-flex align-items-center justify-content-center rounded-3 bg-primary-subtle text-primary mb-3" style="width: 3rem; height: 3rem;">
-                        <i class="fa-solid fa-shield-heart"></i>
-                    </div>
-                    <h5 class="fw-semibold">Secure Access</h5>
-                    <p class="text-muted mb-0">Keep contacts protected with authentication, email verification, and user-level access.</p>
-                </div>
+        <a href="{{ route('register') }}" class="hidden rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white dark:bg-white dark:text-slate-900 sm:inline-flex">Get Started</a>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+            <div class="text-sm font-semibold text-sky-600 dark:text-sky-400">
+                <i class="fa-solid fa-shield-heart mr-2"></i>Secure Access
             </div>
+            <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Keep contacts protected with authentication, email verification, and user-level access.</p>
         </div>
 
-        <div class="col-12 col-md-6 col-xl-4">
-            <div class="card feature-card h-100">
-                <div class="card-body p-4">
-                    <div class="d-inline-flex align-items-center justify-content-center rounded-3 bg-success-subtle text-success mb-3" style="width: 3rem; height: 3rem;">
-                        <i class="fa-solid fa-folder-tree"></i>
-                    </div>
-                    <h5 class="fw-semibold">Organized Storage</h5>
-                    <p class="text-muted mb-0">Use categories, tags, favorites, and notes to keep your contact list structured.</p>
-                </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+            <div class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                <i class="fa-solid fa-folder-tree mr-2"></i>Organized Storage
             </div>
+            <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Use categories, tags, favorites, and notes to keep your contact list structured.</p>
         </div>
 
-        <div class="col-12 col-md-6 col-xl-4">
-            <div class="card feature-card h-100">
-                <div class="card-body p-4">
-                    <div class="d-inline-flex align-items-center justify-content-center rounded-3 bg-warning-subtle text-warning mb-3" style="width: 3rem; height: 3rem;">
-                        <i class="fa-solid fa-chart-column"></i>
-                    </div>
-                    <h5 class="fw-semibold">Smart Insights</h5>
-                    <p class="text-muted mb-0">Track activity, analyze trends, and export your contact data when needed.</p>
-                </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+            <div class="text-sm font-semibold text-amber-600 dark:text-amber-400">
+                <i class="fa-solid fa-chart-column mr-2"></i>Smart Insights
             </div>
+            <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Track activity, analyze trends, and export your contact data when needed.</p>
         </div>
     </div>
 </section>
