@@ -1,5 +1,5 @@
 <section>
-    <div class="mb-6 flex items-end justify-between border-b border-slate-200 pb-4 dark:border-slate-800">
+    <div class="mb-6 flex items-end justify-between ">
         <div>
             <p class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">Features</p>
             <h3 class="mt-2 text-2xl font-semibold text-slate-950 dark:text-white">Everything you need to manage contacts</h3>

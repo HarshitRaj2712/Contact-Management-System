@@ -58,10 +58,10 @@
     </style>
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-900 antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
-<div class="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
-    <header class="flex flex-col gap-4 border-b border-slate-200 pb-4 dark:border-slate-800 md:flex-row md:items-center md:justify-between">
+<div class="mx-auto max-w-6xl  px-4 py-6 sm:px-6 lg:px-8">
+    <header class="flex flex-col gap-4  border-slate-200 pb-4  md:flex-row md:items-center md:justify-between">
         <a href="#top" class="flex items-center gap-3 text-lg font-semibold text-slate-900 ">
-            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-600">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#007FFF]">
                 <i class="fa-solid fa-address-book"></i>
             </span>
             <span>Contact Management System</span>
@@ -83,7 +83,10 @@
                 <a href="{{ route('dashboard') }}" class="rounded-full bg-slate-900 px-4 py-2  dark:bg-white dark:text-slate-900">Dashboard</a>
             @else
                 <a href="{{ route('login') }}" class="hover:text-sky-600 dark:hover:text-sky-400">Login</a>
-                <a href="{{ route('register') }}" class="rounded-full text-black bg-sky-600 px-4 py-2  hover:bg-sky-400">Sign Up</a>
+                <a href="{{ route('register') }}"
+   class="rounded-md bg-gradient-to-r from-[#007FFF] to-[#4FA7FF] px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:from-[#006ad4] hover:to-[#3B94F0] hover:shadow-lg">
+    Sign Up
+</a>
             @endauth
         </div>
     </header>
@@ -123,10 +126,14 @@
                 </a>
 
                 <a href="{{ route('login') }}"
-                   class="rounded-xl border-2 border-white px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-white hover:text-sky-600">
-                    <i class="fa-solid fa-right-to-bracket mr-2"></i>
-                    Login
-                </a>
+   class="group rounded-xl border-2 border-white bg-transparent px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-white hover:border-white">
+
+    <i class="fa-solid fa-right-to-bracket mr-2 text-white transition-colors duration-300 group-hover:text-[#007FFF]"></i>
+
+    <span class="text-white transition-colors duration-300 group-hover:text-[#007FFF]">
+        Login
+    </span>
+</a>
             @endauth
 
         </div>
@@ -136,8 +143,8 @@
 
         <section id="how-it-works">
             <div class="mb-6 text-center">
-                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">How It Works</p>
-                <h2 class="mt-2 text-2xl font-semibold text-slate-950  sm:text-3xl">A simple workflow from sign up to saved contacts</h2>
+                <p class="mb-6 flex items-end justify-between  text-sm font-semibold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">How It Works</p>
+                <h2 class="mb-6 flex items-end justify-between  text-2xl font-semibold text-slate-950  sm:text-3xl">A simple workflow from sign up to saved contacts</h2>
             </div>
 
             <div class="grid gap-4 md:grid-cols-3">
@@ -166,12 +173,7 @@
         </section>
     </main>
 
-    <footer class="border-t border-slate-200 py-6 text-sm text-slate-600 dark:border-slate-800 dark:text-slate-400">
-        <div class="flex flex-col gap-2 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-            <p>&copy; {{ date('Y') }} Contact Management System. All rights reserved.</p>
-            <p>Built for secure and organized contact management.</p>
-        </div>
-    </footer>
+    @include('partials.footer')
 </div>
 
 <script>
