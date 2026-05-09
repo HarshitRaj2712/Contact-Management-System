@@ -1,59 +1,112 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Contact Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel 12 application for organizing personal and professional contacts. It supports rich contact records with multiple phone numbers, email addresses, and physical addresses, plus categories, tags, favorites, soft deletes, import/export, activity tracking, and birthday reminders.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Contact CRUD with profile photos, company, job title, birthday, notes, and favorite status.
+- Multiple phone numbers, email addresses, and addresses per contact.
+- Categories and tags for organizing contacts.
+- Search, filter, duplicate detection, and bulk delete tools.
+- Trash view with restore and permanent delete actions.
+- CSV import and CSV export.
+- PDF export preview.
+- Activity log viewer for tracking user actions.
+- Birthday reminder notification command.
+- Profile management through Laravel Breeze authentication.
+- English and Spanish language switching.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Laravel 12
+- PHP 8.2+
+- MySQL or SQLite
+- Laravel Breeze for authentication
+- Bootstrap 5 for UI styling
+- Vite for frontend asset building
 
-## Learning Laravel
+## Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- PHP 8.2 or newer
+- Composer
+- Node.js and npm
+- A database connection configured in `.env`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Setup
 
-## Laravel Sponsors
+Install PHP dependencies:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+composer install
+```
 
-### Premium Partners
+Copy the environment file and generate an application key:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+copy .env.example .env
+php artisan key:generate
+```
 
-## Contributing
+Configure your database in `.env`, then run migrations:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan migrate
+```
 
-## Code of Conduct
+Install frontend dependencies:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+npm install
+```
 
-## Security Vulnerabilities
+Link storage so uploaded profile photos are publicly accessible:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan storage:link
+```
+
+You can also run the bundled setup script if your environment is already configured:
+
+```bash
+composer run setup
+```
+
+## Running Locally
+
+Start the Laravel server:
+
+```bash
+php artisan serve
+```
+
+Run the Vite dev server in a second terminal:
+
+```bash
+npm run dev
+```
+
+If you want Laravel, the queue worker, logs, and Vite together, use:
+
+```bash
+composer run dev
+```
+
+## Useful Commands
+
+```bash
+php artisan test
+php artisan contacts:send-birthday-reminders
+php artisan schedule:run
+npm run build
+```
+
+## Project Notes
+
+- Most application routes are protected by `auth` and `verified` middleware.
+- Profile photos are stored on the public disk under `storage/app/public/contacts`.
+- CSV export includes contact details, category, tags, notes, and favorite status.
+- The birthday reminder command records activity logs and sends mail when a contact matches today’s date.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the MIT license.
