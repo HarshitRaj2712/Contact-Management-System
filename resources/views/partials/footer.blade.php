@@ -1,11 +1,11 @@
-<footer class="mt-8 w-full bg-[#007FFF] text-white shadow-[0_-20px_60px_rgba(0,127,255,0.24)]">
+<footer class="mt-8 w-full rounded-md bg-[#25D366] text-white shadow-[0_-20px_60px_rgba(37,211,102,0.24)]">
     <div class="w-full px-6 py-12 sm:px-10 lg:px-16">
         <div class="mx-auto max-w-7xl grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
 
             <!-- BRAND -->
             <div>
                 <a href="#top" class="inline-flex items-center gap-3 text-md font-semibold text-white">
-                    <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/20 text-xl backdrop-blur-sm">
+                    <span class="flex h-11 w-11 items-center justify-center rounded-md bg-white/20 text-xl backdrop-blur-sm">
                         <i class="fa-solid fa-address-book"></i>
                     </span>
                     <span>Contact Management System</span>

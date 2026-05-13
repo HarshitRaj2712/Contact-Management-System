@@ -61,7 +61,7 @@
 <div class="mx-auto max-w-6xl  px-4 py-6 sm:px-6 lg:px-8">
     <header class="flex flex-col gap-4  border-slate-200 pb-4  md:flex-row md:items-center md:justify-between">
         <a href="#top" class="flex items-center gap-3 text-lg font-semibold text-slate-900 ">
-            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#007FFF]">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#25D366]">
                 <i class="fa-solid fa-address-book"></i>
             </span>
             <span>Contact Management System</span>
@@ -73,7 +73,7 @@
 
             <button id="darkModeToggle"
                     type="button"
-                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:border-sky-500 hover:text-sky-600 dark:border-slate-700 dark:bg-slate-900  dark:hover:text-sky-400"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-gray-700 transition hover:border-sky-500 hover:text-green-600 dark:border-slate-700 dark:bg-slate-900  dark:hover:text-green-400"
                     title="Toggle dark mode"
                     aria-pressed="false">
                 <i id="darkModeIcon" class="fa-solid fa-moon text-sm"></i>
@@ -84,7 +84,7 @@
             @else
                 <a href="{{ route('login') }}" class="hover:text-sky-600 dark:hover:text-sky-400">Login</a>
                 <a href="{{ route('register') }}"
-   class="rounded-md bg-gradient-to-r from-[#007FFF] to-[#4FA7FF] px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:from-[#006ad4] hover:to-[#3B94F0] hover:shadow-lg">
+   class="rounded-md bg-gradient-to-r from-[#25D366] to-[#7ceea6] px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:from-[#7ceea6] hover:to-[#25D366] hover:shadow-lg">
     Sign Up
 </a>
             @endauth
@@ -93,7 +93,7 @@
 
     <main class="space-y-16 py-12">
         <section id="top"
-    class="relative overflow-hidden rounded-md bg-[#007FFF] px-8 py-14 shadow-[0_20px_50px_rgba(0,127,255,0.28)] sm:px-12 md:px-20 md:py-20">
+            class="relative overflow-hidden rounded-md bg-[#25D366] px-8 py-14 shadow-[0_20px_50px_rgba(37,211,102,0.28)] sm:px-12 md:px-20 md:py-20">
 
     <!-- Decorative Floating Circles -->
     <div class="absolute top-0 right-0 h-52 w-52 translate-x-16 -translate-y-16 rounded-full bg-white/20"></div>
@@ -114,13 +114,13 @@
 
             @auth
                 <a href="{{ route('dashboard') }}"
-                   class="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-sky-600 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-100">
+                   class="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-green-600 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-100">
                     <i class="fa-solid fa-gauge-high mr-2"></i>
                     Go to Dashboard
                 </a>
             @else
                 <a href="{{ route('register') }}"
-                   class="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-sky-600 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-100">
+                   class="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-green-600 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-100">
                     <i class="fa-solid fa-user-plus mr-2"></i>
                     Create Free Account
                 </a>
@@ -128,9 +128,9 @@
                 <a href="{{ route('login') }}"
    class="group rounded-xl border-2 border-white bg-transparent px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-white hover:border-white">
 
-    <i class="fa-solid fa-right-to-bracket mr-2 text-white transition-colors duration-300 group-hover:text-[#007FFF]"></i>
+    <i class="fa-solid fa-right-to-bracket mr-2 text-white transition-colors duration-300 group-hover:text-[#25D366]"></i>
 
-    <span class="text-white transition-colors duration-300 group-hover:text-[#007FFF]">
+    <span class="text-white transition-colors duration-300 group-hover:text-[#25D366]">
         Login
     </span>
 </a>
