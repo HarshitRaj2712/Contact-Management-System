@@ -101,7 +101,7 @@
 
     <div class="relative z-10 mx-auto max-w-4xl text-center">
 
-        <!-- Main Heading -->
+        
         <h1 class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-2xl md:text-3xl">
             Manage Contacts Securely <br />
             <span class="underline decoration-white/30 underline-offset-8">
