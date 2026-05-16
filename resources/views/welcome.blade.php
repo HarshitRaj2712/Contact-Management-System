@@ -109,7 +109,7 @@
             </span>
         </h1>
 
-        <!-- CTA Buttons -->
+        
         <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
 
             @auth
