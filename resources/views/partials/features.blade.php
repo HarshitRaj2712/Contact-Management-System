@@ -6,7 +6,7 @@
             <p class="mt-2 text-slate-600 dark:text-slate-300">A clean workflow for storing, organizing, and finding contacts without clutter.</p>
         </div>
 
-        <a href="{{ route('register') }}" class="hidden rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white dark:bg-white dark:text-slate-900 sm:inline-flex">Get Started</a>
+        <!-- <a href="{{ route('register') }}" class="hidden rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white dark:bg-white dark:text-slate-900 sm:inline-flex">Get Started</a> -->
     </div>
 
     <div class="grid gap-4 md:grid-cols-3">

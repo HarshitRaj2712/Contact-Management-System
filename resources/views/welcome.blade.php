@@ -31,8 +31,53 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background: #f8fafc !important;
-            color: #0f172a !important;
+            background: var(--bg-main) !important;
+            color: var(--text-main) !important;
+        }
+
+        html.dark body {
+            background: var(--bg-main) !important;
+            color: var(--text-main) !important;
+        }
+
+        html.dark header a:not(.rounded-full),
+        html.dark main h1,
+        html.dark main h2,
+        html.dark main h3,
+        html.dark main p,
+        html.dark footer p {
+            color: var(--text-main) !important;
+        }
+
+        html.dark #how-it-works .rounded-2xl,
+        html.dark #features .rounded-2xl {
+            background: var(--bg-panel) !important;
+            border-color: var(--border-color) !important;
+            color: var(--text-main) !important;
+        }
+
+        html.dark #how-it-works .rounded-2xl *,
+        html.dark #features .rounded-2xl * {
+            color: var(--text-main) !important;
+        }
+
+        html.dark #how-it-works .rounded-2xl h3,
+        html.dark #how-it-works .rounded-2xl .text-slate-950,
+        html.dark #features .rounded-2xl h3,
+        html.dark #features .rounded-2xl .text-slate-950,
+        html.dark #features .rounded-2xl .text-white {
+            color: var(--text-main) !important;
+        }
+
+        html.dark #how-it-works .rounded-2xl .text-slate-600,
+        html.dark #features .rounded-2xl .text-slate-600,
+        html.dark #features .rounded-2xl .text-slate-300 {
+            color: var(--text-muted) !important;
+        }
+
+        html.dark #how-it-works .rounded-2xl p,
+        html.dark #features .rounded-2xl p {
+            color: var(--text-muted) !important;
         }
 
         header a:not(.rounded-full),
@@ -84,7 +129,7 @@
             @else
                 <a href="{{ route('login') }}" class="hover:text-sky-600 dark:hover:text-sky-400">Login</a>
                 <a href="{{ route('register') }}"
-   class="rounded-md bg-gradient-to-r from-[#25D366] to-[#7ceea6] px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:from-[#7ceea6] hover:to-[#25D366] hover:shadow-lg">
+   class="rounded-md bg-linear-to-r from-[#25D366] to-[#7ceea6] px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:from-[#7ceea6] hover:to-[#25D366] hover:shadow-lg">
     Sign Up
 </a>
             @endauth
@@ -93,15 +138,16 @@
 
     <main class="space-y-16 py-12">
         <section id="top"
-            class="relative overflow-hidden rounded-md bg-[#25D366] px-8 py-14 shadow-[0_20px_50px_rgba(37,211,102,0.28)] sm:px-12 md:px-20 md:py-20">
+            class="relative overflow-hidden rounded-md bg-[#25D366]
+            px-8 py-14 shadow-[0_20px_50px_rgba(37,211,102,0.28)] sm:px-12 md:px-20 md:py-20">
 
     <!-- Decorative Floating Circles -->
     <div class="absolute top-0 right-0 h-52 w-52 translate-x-16 -translate-y-16 rounded-full bg-white/20"></div>
     <div class="absolute bottom-0 left-0 h-44 w-44 -translate-x-12 translate-y-12 rounded-full bg-white/20"></div>
 
-    <div class="relative z-10 mx-auto max-w-4xl text-center">
+    <div class="relative z-10 mx-auto  max-w-4xl text-center">
 
-        
+
         <h1 class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-2xl md:text-3xl">
             Manage Contacts Securely <br />
             <span class="underline decoration-white/30 underline-offset-8">
@@ -109,7 +155,7 @@
             </span>
         </h1>
 
-        
+
         <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
 
             @auth
@@ -185,6 +231,10 @@
         const darkEnabled = localStorage.getItem('cms-dark') === '1';
 
         document.documentElement.classList.toggle('dark', darkEnabled);
+        document.documentElement.classList.toggle('dark-mode', darkEnabled);
+        document.documentElement.setAttribute('data-theme', darkEnabled ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-bs-theme', darkEnabled ? 'dark' : 'light');
+        document.body.classList.toggle('dark-mode-body', darkEnabled);
         if (icon) {
             icon.className = darkEnabled ? 'fa-solid fa-sun text-sm' : 'fa-solid fa-moon text-sm';
         }
