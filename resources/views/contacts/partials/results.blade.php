@@ -8,7 +8,6 @@
             <div class="col-lg-6">
                 <div class="form-check mb-2">
                     <input class="form-check-input bulk-select" type="checkbox" name="contact_ids[]" value="{{ $contact->id }}" id="select{{ $contact->id }}">
-                    <label class="form-check-label small text-muted" for="select{{ $contact->id }}">Select</label>
                 </div>
                 <div class="card h-100 shadow-sm border-0 {{ $isTrashed ? 'border-danger' : '' }}">
                     <div class="card-body">

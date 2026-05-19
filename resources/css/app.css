@@ -25,6 +25,11 @@
 	--text-muted: #C6AEB2;
 	--border-color: #2F2527;
 	--navbar-bg: rgba(27, 23, 23, 0.85);
+	--bs-primary: #25D366;
+	--bs-primary-rgb: 37, 211, 102;
+	--bs-link-color: #7ef3a8;
+	--bs-link-hover-color: #25D366;
+	--bs-primary-text-emphasis: #7ef3a8;
 }
 
 body {
@@ -92,6 +97,20 @@ body {
 
 .landing-auth-link:hover {
 	color: var(--cms-primary);
+}
+
+.signup-gradient-btn {
+	background: linear-gradient(to right, #25D366, #7ceea6);
+	color: #ffffff;
+	box-shadow: 0 0.6rem 1.2rem rgba(37, 211, 102, 0.22);
+	transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.signup-gradient-btn:hover {
+	background: linear-gradient(to right, #7ceea6, #25D366);
+	color: #ffffff;
+	box-shadow: 0 0.75rem 1.4rem rgba(37, 211, 102, 0.28);
+	transform: translateY(-1px);
 }
 
 .landing-section {
@@ -185,6 +204,46 @@ body.dark-mode-body .navbar,
 body.dark-mode-body .card {
 	background-color: var(--bg-panel) !important;
 	color: var(--text-main);
+}
+
+html.dark-mode .bg-white,
+body.dark-mode-body .bg-white,
+html.dark-mode .card-header.bg-white,
+body.dark-mode-body .card-header.bg-white,
+html.dark-mode .modal-content,
+body.dark-mode-body .modal-content,
+html.dark-mode .dropdown-menu,
+body.dark-mode-body .dropdown-menu,
+html.dark-mode .list-group-item,
+body.dark-mode-body .list-group-item,
+html.dark-mode .table-light,
+body.dark-mode-body .table-light,
+html.dark-mode .bg-light,
+body.dark-mode-body .bg-light {
+	background-color: var(--bg-panel) !important;
+	color: var(--text-main) !important;
+}
+
+html.dark-mode .text-primary,
+body.dark-mode-body .text-primary {
+	color: var(--bs-primary) !important;
+}
+
+html.dark-mode .border-primary,
+body.dark-mode-body .border-primary {
+	border-color: var(--bs-primary) !important;
+}
+
+html.dark-mode .table,
+body.dark-mode-body .table {
+	color: var(--text-main) !important;
+}
+
+html.dark-mode .table thead,
+body.dark-mode-body .table thead,
+html.dark-mode .table th,
+body.dark-mode-body .table th {
+	color: var(--text-main) !important;
 }
 
 html.dark-mode .form-control,

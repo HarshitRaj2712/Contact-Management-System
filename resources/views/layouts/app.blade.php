@@ -34,7 +34,7 @@
         <div class="container-fluid px-0">
             <div class="row g-0 min-vh-100">
                 <aside class="col-12 col-lg-3 col-xl-2 cms-sidebar">
-                    <div class="cms-sidebar-inner d-flex flex-column h-100">
+                    <div class="cms-sidebar-inner d-flex flex-column h-100 px-3 px-lg-4 py-4">
                         <a class="cms-brand text-decoration-none" href="{{ route('dashboard') }}">
                             <span class="cms-brand-mark">
                                 <i class="fa-solid fa-address-book"></i>
@@ -82,7 +82,7 @@
                 </aside>
 
                 <main class="col-12 col-lg-9 col-xl-10 cms-main">
-                    <div class="cms-main-inner py-4 py-lg-5">
+                    <div class="cms-main-inner px-3 px-md-4 px-xl-10 py-4 py-lg-5">
                         <div class="cms-page-toolbar d-flex justify-content-end mb-3">
                             <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm" title="Toggle dark mode" aria-pressed="false">
                                 <i id="darkModeIcon" class="fa-solid fa-moon me-1"></i> Theme

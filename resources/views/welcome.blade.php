@@ -129,7 +129,7 @@
             @else
                 <a href="{{ route('login') }}" class="hover:text-sky-600 dark:hover:text-sky-400">Login</a>
                 <a href="{{ route('register') }}"
-   class="rounded-md bg-linear-to-r from-[#25D366] to-[#7ceea6] px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:from-[#7ceea6] hover:to-[#25D366] hover:shadow-lg">
+   class="signup-gradient-btn rounded-md px-4 py-2 text-sm font-semibold">
     Sign Up
 </a>
             @endauth

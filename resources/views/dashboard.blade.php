@@ -136,6 +136,17 @@
             ->groupBy(function($c){ return \Carbon\Carbon::parse($c->created_at)->format('Y-m'); })
             ->map->count();
 
+        $monthlyLabels = [];
+        $monthlyCounts = [];
+
+        for ($i = 5; $i >= 0; $i--) {
+            $month = now()->copy()->subMonthsNoOverflow($i);
+            $monthKey = $month->format('Y-m');
+
+            $monthlyLabels[] = $month->format('M');
+            $monthlyCounts[] = (int) ($monthlyData[$monthKey] ?? 0);
+        }
+
         $tagData = \App\Models\Tag::withCount(['contacts' => function($q){ $q->where('user_id', auth()->id()); }])
             ->orderBy('contacts_count','desc')
             ->take(6)
@@ -148,24 +159,8 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             (function(){
-                // Build datasets (server-side simple aggregation)
-                const months = [];
-                const counts = [];
-                (function(){
-                    const now = new Date();
-                    for (let i = 5; i >= 0; i--) {
-                        const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-                        months.push(d.toLocaleString(undefined, { month: 'short' }));
-                    }
-                })();
-
-                // Fetch monthly counts via inline endpoint-less approach: render from blade by querying here
-                const monthlyData = @json($monthlyData);
-
-                months.forEach((m, idx)=>{
-                    const key = Object.keys(monthlyData)[idx] ?? Object.keys(monthlyData)[idx];
-                    counts.push(Object.values(monthlyData)[idx] ?? 0);
-                });
+                const months = @json($monthlyLabels);
+                const counts = @json($monthlyCounts);
 
                 const ctx = document.getElementById('contactsLineChart');
                 if (ctx) {
@@ -176,8 +171,8 @@
                             datasets: [{
                                 label: 'Contacts',
                                 data: counts,
-                                borderColor: '#0d6efd',
-                                backgroundColor: 'rgba(13,110,253,0.08)',
+                                borderColor: '#25D366',
+                                backgroundColor: 'rgba(37,211,102,0.12)',
                                 tension: 0.25,
                                 fill: true,
                             }]
@@ -196,7 +191,7 @@
                 if (ctx2) {
                     new Chart(ctx2, {
                         type: 'doughnut',
-                        data: { labels: tagLabels, datasets: [{ data: tagCounts, backgroundColor: ['#0d6efd','#ffc107','#198754','#dc3545','#6f42c1','#0dcaf0'] }] },
+                        data: { labels: tagLabels, datasets: [{ data: tagCounts, backgroundColor: ['#25D366','#7ef3a8','#198754','#2A2223','#6b7280','#34d399'] }] },
                         options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
                     });
                 }
