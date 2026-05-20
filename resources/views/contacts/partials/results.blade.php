@@ -6,7 +6,7 @@
     <div class="row g-4">
         @foreach ($contacts as $contact)
             <div class="col-lg-6">
-                <div class="form-check mb-2">
+                <div class="d-flex justify-content-end mb-2 pe-1">
                     <input class="form-check-input bulk-select" type="checkbox" name="contact_ids[]" value="{{ $contact->id }}" id="select{{ $contact->id }}">
                 </div>
                 <div class="card h-100 shadow-sm border-0 {{ $isTrashed ? 'border-danger' : '' }}">
