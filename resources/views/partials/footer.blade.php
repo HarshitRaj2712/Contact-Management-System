@@ -28,7 +28,7 @@
                     <a href="#top" class="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/10 transition hover:bg-white hover:text-[#007FFF]">
                         <i class="fa-brands fa-linkedin-in"></i>
                     </a>
-                    <a href="#top" class="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/10 transition hover:bg-white hover:text-[#007FFF]">
+                    <a href="https://github.com/HarshitRaj2712/contact-management-system" class="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/10 transition hover:bg-white hover:text-[#007FFF]">
                         <i class="fa-brands fa-github"></i>
                     </a>
                 </div>
