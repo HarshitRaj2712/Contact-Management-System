@@ -1,3 +1,4 @@
+
 <footer class="mt-8 w-full rounded-md bg-[#25D366] text-white shadow-[0_-20px_60px_rgba(37,211,102,0.24)]">
     <div class="w-full px-6 py-12 sm:px-10 lg:px-16">
         <div class="mx-auto max-w-7xl grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
@@ -25,7 +26,7 @@
                     <a href="#top" class="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/10 transition hover:bg-white hover:text-[#007FFF]">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/harshit-raj-10931b282/" class="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/10 transition hover:bg-white hover:text-[#007FFF]">
+                    <a href="#top" class="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/10 transition hover:bg-white hover:text-[#007FFF]">
                         <i class="fa-brands fa-linkedin-in"></i>
                     </a>
                     <a href="https://github.com/HarshitRaj2712/contact-management-system" class="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/10 transition hover:bg-white hover:text-[#007FFF]">
